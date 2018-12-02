@@ -3,8 +3,9 @@
 //show congrats message is success is true
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default (props) => {
+export const Congrats = (props) => {
   if (props.success) {
     return (
       <div data-test='comp-congrats'>
@@ -19,3 +20,9 @@ export default (props) => {
     );
   }
 }
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired,
+};
+
+export default Congrats;
