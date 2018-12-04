@@ -1,11 +1,8 @@
 import checkPropTypes from 'check-prop-types';
 
 import rootReducer from '../src/reducers';
-import { createStore } from 'redux';
-
-export const storeFactory = (initialState) => {
-  return createStore(rootReducer, initialState);
-}
+import { middlewares } from '../src/store';
+import { createStore, applyMiddleware } from 'redux';
 
 /**
  * Return node(s) with the given data-test attribute.
@@ -13,9 +10,13 @@ export const storeFactory = (initialState) => {
  * @param {string} val - Value of data-test attribute for search.
  * @returns {ShallowWrapper}
  */
-
 export const findByTestAttr = (wrapper, val) => { //val data-test attr
   return wrapper.find(`[data-test="${val}"]`);
+}
+
+export const storeFactory = (initialState) => {
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+  return createStoreWithMiddleware(rootReducer, initialState);
 }
 
 export const checkProps = (component, conformingProps) => {
