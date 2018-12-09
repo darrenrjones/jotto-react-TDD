@@ -1,12 +1,31 @@
-import { CORRECT_GUESS } from './';
+import moxios from 'moxios';
 
-describe('correctGUess', () => {
+import { storeFactory } from '../../test/testUtils';
+import { getSecretWord } from './';
 
-  it('returns an action with type CORRECT_GUESS', () => {
-    // const action = correctGuess();
-    // //toBe can not be used for muteable objects like {} toBe is like ===
-    // //toEqual is a deep equal that will check values within as well
-    // expect(action).toEqual({ type: CORRECT_GUESS })
+describe('getSecretWord action creator', () => {
+  beforeEach(() => {
+    moxios.install();
   });
+  afterEach(() => {
+    moxios.uninstall();
+  });
+  test('adds response word to state', () => {
+    const secretWord = 'party';
+    const store = storeFactory();
 
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response : secretWord
+      });
+    });
+
+    return store.dispatch(getSecretWord())
+      .then(() => {
+        const newState = store.getState();
+        expect(newState.secretWord).toBe(secretWord);
+      });
+  });
 });
