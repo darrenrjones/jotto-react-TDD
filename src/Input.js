@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { guessWord } from './actions';
+
 export class Input extends React.Component {
   render() {
     const contents = this.props.success
@@ -34,4 +36,5 @@ export class Input extends React.Component {
 const mapStateToProps = ({ success }) => {
   return { success };
 }
-export default connect(mapStateToProps)(Input);
+export default connect(mapStateToProps, { guessWord })(Input); 
+//don't need mapStateToDispatch just want to ensure guessWord is passed as prop to component
