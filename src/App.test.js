@@ -2,8 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { storeFactory } from '../test/testUtils';
 
-import App, { UnconnectedApp } from './App';
-
+import App from './App';
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
@@ -47,6 +46,7 @@ it('`getSecretWord` runs on App mount', () => {
     guessedWords: []
   }
 
+  const UnconnectedApp = App.WrappedComponent; //unconnected version of App
   //setup app component with getSecretWordMock as the getSecretWord prop  
   const wrapper = shallow(<UnconnectedApp {...props} />)
 

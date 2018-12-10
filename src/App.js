@@ -8,7 +8,7 @@ import { getSecretWord } from './actions';
 
 import './App.css';
 
-export class UnconnectedApp extends Component {
+export class App extends Component {
   componentDidMount() {
     this.props.getSecretWord();
   }
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => {
 
 }
 
-export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp); 
+export default connect(mapStateToProps, { getSecretWord })(App); 
