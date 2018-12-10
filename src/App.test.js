@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { storeFactory } from '../test/testUtils';
 
-import App from './App';
+import App, { UnconnectedApp } from './App';
+
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
@@ -34,9 +35,25 @@ describe('redux', () => {
     const wrapper = setup();
     const getSecretWordProp = wrapper.instance().props.getSecretWord;
     expect(getSecretWordProp).toBeInstanceOf(Function);
-  })
-
-
-
-
+  });
 });
+
+it('`getSecretWord` runs on App mount', () => {
+  const getSecretWordMock = jest.fn(); //jest will be able to see when this is called
+
+  const props = {
+    getSecretWord: getSecretWordMock,
+    success: false,
+    guessedWords: []
+  }
+
+  //setup app component with getSecretWordMock as the getSecretWord prop  
+  const wrapper = shallow(<UnconnectedApp {...props} />)
+
+  //run liofecycle method
+  wrapper.instance().componentDidMount(); //this will use the mock not the actual getSecretWord function
+
+  //check to see if mock ran
+  const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+  expect(getSecretWordCallCount).toBe(1);
+})
