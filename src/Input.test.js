@@ -70,5 +70,23 @@ describe('redux props', () => {
     const wrapper = setup();
     const guessWordProp = wrapper.instance().props.guessWord;
     expect(guessWordProp).toBeInstanceOf(Function);
-  })
+  });
 });
+
+describe('`guessWord action creator call', () => {
+
+  it('`guessWord` is called on submit button click', () => {
+    const guessWordMock = jest.fn();
+
+    const UnconnectedInput = Input.WrappedComponent;
+
+    const wrapper = shallow(<UnconnectedInput guessWord={guessWordMock} />);
+    const submitButton = findByTestAttr(wrapper, 'submit-button');
+    submitButton.simulate('click');
+
+    const guessWordMockCallCount = guessWordMock.mock.calls.length;
+    expect(guessWordMockCallCount).toBe(1);
+
+
+  });
+})
