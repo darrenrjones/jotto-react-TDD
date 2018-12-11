@@ -16,6 +16,7 @@ export class App extends Component {
     return (
       <div className="container">
         <h1>Jotto App</h1>
+        <div> The secret word is: {this.props.secretWord}</div>
         <Congrats success={this.props.success} />
         <Input />
         <GuessedWords guessedWords={this.props.guessedWords} />
