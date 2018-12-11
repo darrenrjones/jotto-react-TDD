@@ -12,11 +12,14 @@ export const Congrats = (props) => {
         <span data-test='congrats-message'>
           Congratulations! You guessed the word!!!!
         </span>
+        {/* Restart button comonenthere */}
+
       </div>
     );
   } else {
     return (
-      <div data-test='comp-congrats'></div>
+      <div data-test='comp-congrats'>
+      </div>
     );
   }
 }

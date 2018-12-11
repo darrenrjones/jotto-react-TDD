@@ -69,4 +69,8 @@ describe('there are wordsGuessed', () => {
     const guessedWordsNodes = findByTestAttr(wrapper, 'guessed-word');
     expect(guessedWordsNodes.length).toBe(guessedWords.length);
   });
+  it('should render number of guesses p', () => {
+    const numberOfGuessesNode = findByTestAttr(wrapper, 'guessed-word-count');
+    expect(numberOfGuessesNode.length).toBe(1);
+  });
 });

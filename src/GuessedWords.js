@@ -10,8 +10,9 @@ export const GuessedWords = (props) => {
       </span>
     );
   } else {
-    const guessedWordsRows = props.guessedWords.map((word,i) => (
+    const guessedWordsRows = props.guessedWords.map((word, i) => (
       <tr data-test='guessed-word' key={i}>
+        <td>{i+1}</td>
         <td>{word.guessedWord}</td>
         <td>{word.letterMatchCount}</td>
       </tr>
@@ -19,9 +20,14 @@ export const GuessedWords = (props) => {
     contents = (
       <div data-test='guessed-words'>
         <h3>Guessed Words</h3>
+        <p data-test='guessed-word-count'>{guessedWordsRows.length} guesses made</p>
         <table className='table table-sm'>
           <thead className='thead-dark'>
-            <tr><th>Guess</th><th>Matching Letters</th></tr>
+            <tr>
+              <th>#</th>
+              <th>Guess</th>
+              <th>Matching Letters</th>
+            </tr>
           </thead>
           <tbody>
             {guessedWordsRows}
